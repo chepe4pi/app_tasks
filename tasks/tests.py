@@ -174,4 +174,4 @@ class SummaryTests(BaseTestCase):
         self.assertEqual(response.data['priorities']['low'], 1)
         self.assertEqual(response.data['priorities']['high'], 1)
 
-# TEST 2
+# TEST 3
