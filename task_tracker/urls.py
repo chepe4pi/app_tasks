@@ -30,6 +30,7 @@ from drf_yasg import openapi
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin2/', admin.site.urls),
     path('', include('tasks.urls')),
 ]
 
