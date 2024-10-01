@@ -30,7 +30,7 @@ class TaskItemTests(BaseTestCase):
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['title'], 'Test Task WITH ERROR')
+        self.assertEqual(response.data['title'], 'Test Task')
 
     def test_list_tasks(self):
         TaskItem.objects.create(title='Task 1', description='Description 1', priority='medium', due_date='2023-12-31')
