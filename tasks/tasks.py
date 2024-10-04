@@ -2,8 +2,6 @@ import os
 
 from celery import shared_task, Celery
 
-from tasks.models import UserSummary
-
 from django.conf import settings
 
 
@@ -16,6 +14,8 @@ app.autodiscover_tasks()
 
 @shared_task
 def update_total_time(total_time, summary_id):
+    from tasks.models import UserSummary
+
     summary = UserSummary.objects.get(id=summary_id)
     summary.total_time = total_time
     summary.save()
