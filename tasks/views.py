@@ -4,7 +4,8 @@ from rest_framework import viewsets, permissions
 from datetime import datetime
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import TaskRecord, TaskItem
+from .models import TaskRecord, TaskItem, UserSummary
+from tasks.tasks import update_total_time
 
 
 class TaskItemViewSet(viewsets.ModelViewSet):
@@ -33,8 +34,15 @@ class SummaryViewSet(viewsets.ViewSet):
 
         records = TaskRecord.objects.filter(user=request.user, date_completed=date)
 
-        # Aggregation for total time spent
-        total_time = records.aggregate(total_time=Sum('time_spent'))['total_time'] or 0
+        summary, created = UserSummary.objects.get_or_create(user=request.user)
+
+        if summary.total_time:
+            total_time = summary.total_time
+        else:
+            # Aggregation for total time spent
+            total_time = records.aggregate(total_time=Sum('time_spent'))['total_time'] or 0
+
+            update_total_time.delay(total_time, summary.id)
 
         # Aggregation for priority count
         priority_counts = records.values('task__priority').annotate(count=Count('task__priority'))

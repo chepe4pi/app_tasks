@@ -30,3 +30,8 @@ class TaskRecord(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.task.title} ({self.date_completed})"
+
+
+class UserSummary(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    total_time = models.PositiveIntegerField(help_text="Time spent in minutes", null=True)
