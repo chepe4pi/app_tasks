@@ -22,3 +22,4 @@ def update_total_time(total_time, summary_id):
     summary.total_time = total_time
     summary.save()
 
+
