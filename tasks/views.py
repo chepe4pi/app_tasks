@@ -12,8 +12,14 @@ logger = logging.getLogger(__name__)
 
 
 class TaskItemViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.AllowAny]
     queryset = TaskItem.objects.all()
     serializer_class = TaskItemSerializer
+
+    def list(self, request, *args, **kwargs):
+        logger.debug('test123 info')
+
+        return super().list(request, *args, **kwargs)
 
 
 class TaskRecordViewSet(viewsets.ModelViewSet):
@@ -22,7 +28,6 @@ class TaskRecordViewSet(viewsets.ModelViewSet):
     serializer_class = TaskRecordSerializer
 
     def list(self, request, *args, **kwargs):
-        logger.debug('test123 info')
 
         self.request.user.abc
         return super().list(request, *args, **kwargs)
