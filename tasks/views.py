@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from .models import TaskRecord, TaskItem, UserSummary
 from tasks.tasks import update_total_time
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class TaskItemViewSet(viewsets.ModelViewSet):
     queryset = TaskItem.objects.all()
@@ -19,6 +22,8 @@ class TaskRecordViewSet(viewsets.ModelViewSet):
     serializer_class = TaskRecordSerializer
 
     def list(self, request, *args, **kwargs):
+        logger.info('test info')
+
         self.request.user.abc
         return super().list(request, *args, **kwargs)
 
