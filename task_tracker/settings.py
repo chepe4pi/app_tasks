@@ -149,3 +149,14 @@ CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL', 'redis://localhost:6379/0')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn=os.environ.get('SENTRY_DSN', ''),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,  # Adjust this value in production as needed
+    send_default_pii=True  # Optional: send personally identifiable information in events
+)
