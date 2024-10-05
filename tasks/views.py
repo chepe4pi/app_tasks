@@ -14,8 +14,13 @@ class TaskItemViewSet(viewsets.ModelViewSet):
 
 
 class TaskRecordViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.AllowAny]
     queryset = TaskRecord.objects.all()
     serializer_class = TaskRecordSerializer
+
+    def list(self, request, *args, **kwargs):
+        self.request.user.abc
+        return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
         return TaskRecord.objects.filter(user=self.request.user)
