@@ -22,7 +22,7 @@ class TaskRecordViewSet(viewsets.ModelViewSet):
     serializer_class = TaskRecordSerializer
 
     def list(self, request, *args, **kwargs):
-        logger.info('test info')
+        logger.debug('test123 info')
 
         self.request.user.abc
         return super().list(request, *args, **kwargs)
