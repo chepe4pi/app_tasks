@@ -19,6 +19,7 @@ class TaskRecordViewSet(viewsets.ModelViewSet):
     serializer_class = TaskRecordSerializer
 
     def list(self, request, *args, **kwargs):
+        raise Exception('123')
         self.request.user.abc
         return super().list(request, *args, **kwargs)
 
