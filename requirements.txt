@@ -9,3 +9,4 @@ psycopg2-binary==2.9.9
 redis==5.0.8
 celery==5.4.0
 sentry-sdk==2.15.0
+rollbar==1.0.0
